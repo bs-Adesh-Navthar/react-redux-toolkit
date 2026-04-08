@@ -55,12 +55,6 @@ function ProductsPage({ products, cart, onAdd, onRemove }) {
 function CartPage({ cart, onRemove, onIncrease, onDecrease, onClear, onPlaceOrder, orderMessage, clearOrderMessage }) {
 	const navigate = useNavigate()
 
-	useEffect(() => {
-		return () => {
-			clearOrderMessage()
-		}
-	}, [clearOrderMessage])
-
 	return (
 		<>
 			<div className="page-top">
@@ -103,6 +97,7 @@ function App() {
 	const handlePlaceOrder = () => {
 		dispatch(clearCart())
 		setOrderMessage('Order placed successfully!')
+		setTimeout(() => setOrderMessage(''), 2400)
 	}
 
 	return (
@@ -131,7 +126,7 @@ function App() {
 								onDecrease={(id) => dispatch(decreaseQuantity(id))}
 								onClear={() => dispatch(clearCart())}
 								onPlaceOrder={handlePlaceOrder}
-						clearOrderMessage={() => setOrderMessage('')}
+								clearOrderMessage={() => setOrderMessage('')}
 								orderMessage={orderMessage}
 							/>
 						}
